@@ -90,6 +90,18 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+app.use((err, req, res, next) => {
+  console.error(err.stack || err.message);
+
+  if (err.message === 'Not allowed by CORS') {
+    return res.status(403).json({ message: 'Not allowed by CORS' });
+  }
+
+  res.status(500).json({
+    message: process.env.NODE_ENV === 'production' ? 'Server error' : err.message,
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

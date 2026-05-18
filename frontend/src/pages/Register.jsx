@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from '../slices/authSlice';
-import axios from 'axios';
+import api from '../services/api';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -35,7 +35,7 @@ const Register = () => {
     setLoading(true);
     setError('');
     try {
-      const { data } = await axios.post('/api/users', { name, email, password });
+      const { data } = await api.post('/users', { name, email, password });
       dispatch(setCredentials(data));
       navigate(redirect);
     } catch (err) {
