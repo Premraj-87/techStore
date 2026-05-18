@@ -13,10 +13,29 @@ const rateLimit = require('express-rate-limit');
 
 const app = express();
 
+const normalizeOrigin = (origin) => origin?.replace(/\/$/, '');
+
 const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173,http://127.0.0.1:5173')
   .split(',')
-  .map((origin) => origin.trim())
+  .map((origin) => normalizeOrigin(origin.trim()))
   .filter(Boolean);
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+
+  const normalized = normalizeOrigin(origin);
+
+  if (allowedOrigins.includes(normalized)) {
+    return true;
+  }
+
+  // Vercel production & preview deployments
+  if (/^https:\/\/[\w.-]+\.vercel\.app$/.test(normalized)) {
+    return true;
+  }
+
+  return false;
+};
 
 const sanitizeMongoInput = (req, res, next) => {
   ['body', 'headers'].forEach((key) => {
@@ -48,10 +67,11 @@ app.use(helmet());
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (isAllowedOrigin(origin)) {
         return callback(null, true);
       }
 
+      console.warn(`CORS blocked origin: ${origin}`);
       return callback(new Error('Not allowed by CORS'));
     },
   })
