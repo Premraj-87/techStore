@@ -1,0 +1,503 @@
+const galleryByCategory = {
+  technology: [
+    'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=800&auto=format&fit=crop',
+  ],
+  audio: [
+    'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1543512214-318c7553f230?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1608043152269-41e97669d51e?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&auto=format&fit=crop',
+  ],
+  cases: [
+    'https://images.unsplash.com/photo-1601593346740-925612772716?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1595225476474-87563907a212?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1606220838315-056192d5e927?w=800&auto=format&fit=crop',
+  ],
+  accessories: [
+    'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=800&auto=format&fit=crop',
+  ],
+};
+
+const enrichProductImages = (product) => {
+  const pool = galleryByCategory[product.category] || [];
+  const images = [...product.images];
+
+  for (const url of pool) {
+    if (images.length >= 4) break;
+    if (!images.includes(url)) images.push(url);
+  }
+
+  return { ...product, images };
+};
+
+const products = [
+  // TECHNOLOGY (15)
+  {
+    name: "MacBook Pro 16\" M3 Max",
+    brand: "Apple",
+    category: "technology",
+    price: 349900,
+    originalPrice: 369900,
+    rating: 4.9,
+    reviews: 128,
+    countInStock: 5,
+    images: ["https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&auto=format&fit=crop"],
+    description: "The new MacBook Pro is a powerhouse of a laptop. Supercharged by M3 Max, fully covered under Apple India warranty.",
+    specs: [{ label: "Processor", value: "Apple M3 Max" }, { label: "Memory", value: "36GB" }, { label: "Storage", value: "1TB SSD" }]
+  },
+  {
+    name: "iPhone 15 Pro Max (Titanium)",
+    brand: "Apple",
+    category: "technology",
+    price: 159900,
+    originalPrice: 169900,
+    rating: 4.8,
+    reviews: 245,
+    countInStock: 12,
+    images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&auto=format&fit=crop"],
+    description: "Forged in titanium and featuring the groundbreaking A17 Pro chip. Dual SIM (Nano-SIM and eSIM) support for Indian carriers.",
+    specs: [{ label: "Display", value: "6.7-inch Super Retina XDR" }, { label: "Chip", value: "A17 Pro" }, { label: "Camera", value: "48MP Main" }]
+  },
+  {
+    name: "Samsung Galaxy S24 Ultra",
+    brand: "Samsung",
+    category: "technology",
+    price: 129999,
+    originalPrice: 134999,
+    rating: 4.7,
+    reviews: 180,
+    countInStock: 20,
+    images: ["https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=800&auto=format&fit=crop"],
+    description: "Welcome to the era of mobile AI. With Galaxy S24 Ultra in your hands, you can unleash whole new levels of creativity. Made in India edition.",
+    specs: [{ label: "Processor", value: "Snapdragon 8 Gen 3" }, { label: "Camera", value: "200MP Quad" }, { label: "Battery", value: "5000mAh" }]
+  },
+  {
+    name: "OnePlus 12 5G",
+    brand: "OnePlus",
+    category: "technology",
+    price: 64999,
+    originalPrice: 69999,
+    rating: 4.6,
+    reviews: 320,
+    countInStock: 50,
+    images: ["https://images.unsplash.com/photo-1601593346740-925612772716?w=800&auto=format&fit=crop"],
+    description: "Smooth beyond belief. Co-developed with Hasselblad, offering lightning-fast 100W SUPERVOOC charging designed for Indian power grids.",
+    specs: [{ label: "RAM", value: "12GB" }, { label: "Storage", value: "256GB" }, { label: "Charging", value: "100W Fast Charge" }]
+  },
+  {
+    name: "Dell XPS 15",
+    brand: "Dell",
+    category: "technology",
+    price: 185000,
+    originalPrice: 195000,
+    rating: 4.8,
+    reviews: 95,
+    countInStock: 8,
+    images: ["https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=800&auto=format&fit=crop"],
+    description: "A perfect balance of power and portability, featuring an OLED InfinityEdge display and 13th Gen Intel Core processors.",
+    specs: [{ label: "Processor", value: "Intel Core i7 13700H" }, { label: "GPU", value: "NVIDIA RTX 4060" }, { label: "RAM", value: "16GB DDR5" }]
+  },
+  {
+    name: "Sony PlayStation 5",
+    brand: "Sony",
+    category: "technology",
+    price: 54990,
+    originalPrice: 54990,
+    rating: 4.9,
+    reviews: 800,
+    countInStock: 15,
+    images: ["https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800&auto=format&fit=crop"],
+    description: "Experience lightning-fast loading with an ultra-high speed SSD, deeper immersion with haptic feedback, and an all-new generation of incredible PlayStation games.",
+    specs: [{ label: "Storage", value: "825GB SSD" }, { label: "Output", value: "4K 120Hz" }, { label: "Controller", value: "DualSense" }]
+  },
+  {
+    name: "Xbox Series X",
+    brand: "Microsoft",
+    category: "technology",
+    price: 54990,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 420,
+    countInStock: 10,
+    images: ["https://images.unsplash.com/photo-1605901309584-818e25960b8f?w=800&auto=format&fit=crop"],
+    description: "The fastest, most powerful Xbox ever. Includes Xbox Game Pass Ultimate trial for access to 100+ high-quality games.",
+    specs: [{ label: "Performance", value: "12 Teraflops" }, { label: "Storage", value: "1TB Custom NVMe" }, { label: "Resolution", value: "True 4K Gaming" }]
+  },
+  {
+    name: "iPad Pro 12.9\"",
+    brand: "Apple",
+    category: "technology",
+    price: 112900,
+    originalPrice: 119900,
+    rating: 4.9,
+    reviews: 150,
+    countInStock: 18,
+    images: ["https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop"],
+    description: "Astonishing performance. Incredibly advanced displays. Superfast wireless connectivity. Next-level Apple Pencil capabilities.",
+    specs: [{ label: "Chip", value: "M2" }, { label: "Display", value: "Liquid Retina XDR" }, { label: "Camera", value: "Pro camera system" }]
+  },
+  {
+    name: "Nintendo Switch OLED",
+    brand: "Nintendo",
+    category: "technology",
+    price: 34990,
+    originalPrice: 39990,
+    rating: 4.7,
+    reviews: 210,
+    countInStock: 25,
+    images: ["https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=800&auto=format&fit=crop"],
+    description: "Play at home on the TV or on-the-go with a vibrant 7-inch OLED screen.",
+    specs: [{ label: "Screen", value: "7-inch OLED" }, { label: "Storage", value: "64GB Internal" }, { label: "Battery", value: "4.5-9 Hours" }]
+  },
+  {
+    name: "Meta Quest 3",
+    brand: "Meta",
+    category: "technology",
+    price: 49990,
+    originalPrice: 54990,
+    rating: 4.8,
+    reviews: 85,
+    countInStock: 20,
+    images: ["https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=800&auto=format&fit=crop"],
+    description: "Breakthrough mixed reality headset. Transform your home into so much more with Meta Quest 3.",
+    specs: [{ label: "Storage", value: "128GB" }, { label: "Resolution", value: "4K+ Infinite Display" }, { label: "Processor", value: "Snapdragon XR2 Gen 2" }]
+  },
+  {
+    name: "Google Pixel 8 Pro",
+    brand: "Google",
+    category: "technology",
+    price: 106999,
+    originalPrice: 106999,
+    rating: 4.6,
+    reviews: 140,
+    countInStock: 15,
+    images: ["https://images.unsplash.com/photo-1598327105666-5b89351cb31b?w=800&auto=format&fit=crop"],
+    description: "The all-pro Google phone. Powerful, super helpful, and secure. Features the best Pixel camera yet and Google AI.",
+    specs: [{ label: "Chip", value: "Google Tensor G3" }, { label: "Display", value: "6.7-inch Super Actua" }, { label: "RAM", value: "12GB" }]
+  },
+  {
+    name: "Asus ROG Zephyrus G14",
+    brand: "Asus",
+    category: "technology",
+    price: 165000,
+    originalPrice: 175000,
+    rating: 4.8,
+    reviews: 70,
+    countInStock: 10,
+    images: ["https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800&auto=format&fit=crop"],
+    description: "The world's most powerful 14-inch Windows 11 gaming laptop. Featuring an Anime Matrix LED display.",
+    specs: [{ label: "Processor", value: "AMD Ryzen 9" }, { label: "GPU", value: "RTX 4060" }, { label: "Screen", value: "14-inch QHD 165Hz" }]
+  },
+  {
+    name: "Samsung Galaxy Tab S9 Ultra",
+    brand: "Samsung",
+    category: "technology",
+    price: 119999,
+    originalPrice: 125999,
+    rating: 4.7,
+    reviews: 90,
+    countInStock: 12,
+    images: ["https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop"],
+    description: "Our largest, most powerful tablet yet. The expansive 14.6-inch Dynamic AMOLED 2X display brings your ideas to life.",
+    specs: [{ label: "Screen", value: "14.6-inch AMOLED" }, { label: "Stylus", value: "S Pen Included" }, { label: "Durability", value: "IP68 Water Resistant" }]
+  },
+  {
+    name: "GoPro HERO12 Black",
+    brand: "GoPro",
+    category: "technology",
+    price: 44990,
+    originalPrice: 49990,
+    rating: 4.6,
+    reviews: 210,
+    countInStock: 30,
+    images: ["https://images.unsplash.com/photo-1564466809058-bf4114d55352?w=800&auto=format&fit=crop"],
+    description: "Incredible image quality, even better HyperSmooth video stabilization and a huge boost in battery life.",
+    specs: [{ label: "Resolution", value: "5.3K Video" }, { label: "Waterproof", value: "Up to 33ft" }, { label: "Battery", value: "Enduro Battery" }]
+  },
+  {
+    name: "DJI Mini 3 Pro",
+    brand: "DJI",
+    category: "technology",
+    price: 84990,
+    originalPrice: 89990,
+    rating: 4.8,
+    reviews: 130,
+    countInStock: 8,
+    images: ["https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&auto=format&fit=crop"],
+    description: "The mega-capable DJI Mini 3 Pro is just as powerful as it is portable. Weighing less than 249 g.",
+    specs: [{ label: "Weight", value: "< 249 g" }, { label: "Video", value: "4K HDR" }, { label: "Flight Time", value: "Up to 34 mins" }]
+  },
+
+  // AUDIO (10)
+  {
+    name: "Sony WH-1000XM5",
+    brand: "Sony",
+    category: "audio",
+    price: 29990,
+    originalPrice: 34990,
+    rating: 4.8,
+    reviews: 845,
+    countInStock: 40,
+    images: ["https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800&auto=format&fit=crop"],
+    description: "Industry leading noise cancellation with two processors controlling 8 microphones. Magnificent sound, engineered to perfection.",
+    specs: [{ label: "Noise Canceling", value: "ANC" }, { label: "Battery Life", value: "Up to 30 hours" }, { label: "Connectivity", value: "Bluetooth 5.2" }]
+  },
+  {
+    name: "Apple AirPods Pro (2nd Gen)",
+    brand: "Apple",
+    category: "audio",
+    price: 24900,
+    originalPrice: 24900,
+    rating: 4.9,
+    reviews: 1200,
+    countInStock: 60,
+    images: ["https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&auto=format&fit=crop"],
+    description: "Up to 2x more Active Noise Cancellation than the previous generation. Spatial Audio takes immersion to a remarkably personal level.",
+    specs: [{ label: "Chip", value: "H2 Chip" }, { label: "Battery", value: "Up to 6 hours listening" }, { label: "Case", value: "MagSafe Charging Case" }]
+  },
+  {
+    name: "Bose QuietComfort Ultra",
+    brand: "Bose",
+    category: "audio",
+    price: 35900,
+    originalPrice: 39900,
+    rating: 4.7,
+    reviews: 320,
+    countInStock: 25,
+    images: ["https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&auto=format&fit=crop"],
+    description: "World-class noise cancellation, quieter than ever before. Breakthrough spatialized audio for immersive listening.",
+    specs: [{ label: "Noise Canceling", value: "CustomTune tech" }, { label: "Battery Life", value: "Up to 24 hours" }, { label: "Comfort", value: "Premium ear cushions" }]
+  },
+  {
+    name: "HomePod Mini",
+    brand: "Apple",
+    category: "audio",
+    price: 9900,
+    originalPrice: 10900,
+    rating: 4.8,
+    reviews: 512,
+    countInStock: 30,
+    images: ["https://images.unsplash.com/photo-1543512214-318c7553f230?w=800&auto=format&fit=crop"],
+    description: "Jam-packed with innovation, HomePod mini delivers unexpectedly big sound for a speaker of its size. Perfect for any Indian home.",
+    specs: [{ label: "Audio", value: "360-degree audio" }, { label: "Assistant", value: "Siri" }, { label: "Smart Home", value: "Thread support" }]
+  },
+  {
+    name: "JBL Flip 6",
+    brand: "JBL",
+    category: "audio",
+    price: 9999,
+    originalPrice: 11999,
+    rating: 4.6,
+    reviews: 450,
+    countInStock: 50,
+    images: ["https://images.unsplash.com/photo-1608043152269-41e97669d51e?w=800&auto=format&fit=crop"],
+    description: "Bold sound for every adventure. The JBL Flip 6 delivers powerful JBL Original Pro Sound with exceptional clarity.",
+    specs: [{ label: "Durability", value: "IP67 Waterproof" }, { label: "Battery Life", value: "Up to 12 hours" }, { label: "Output", value: "20W RMS" }]
+  },
+  {
+    name: "Sennheiser Momentum 4",
+    brand: "Sennheiser",
+    category: "audio",
+    price: 29990,
+    originalPrice: 34990,
+    rating: 4.7,
+    reviews: 180,
+    countInStock: 20,
+    images: ["https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&auto=format&fit=crop"],
+    description: "Discover class-leading sound with Sennheiser's audiophile-inspired acoustic system. Astounding 60-hour battery life.",
+    specs: [{ label: "Battery Life", value: "Up to 60 hours" }, { label: "Sound", value: "Audiophile-inspired 42mm transducer" }, { label: "Bluetooth", value: "5.2 aptX Adaptive" }]
+  },
+  {
+    name: "Nothing Ear (2)",
+    brand: "Nothing",
+    category: "audio",
+    price: 9999,
+    originalPrice: 12999,
+    rating: 4.5,
+    reviews: 210,
+    countInStock: 35,
+    images: ["https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&auto=format&fit=crop"],
+    description: "Ultra-light at just 4.5g. High-Res Audio Certified with Next-level Active Noise Cancellation.",
+    specs: [{ label: "Design", value: "Transparent" }, { label: "Audio", value: "Hi-Res Audio Certified" }, { label: "Driver", value: "11.6mm custom driver" }]
+  },
+  {
+    name: "Sonos Era 300",
+    brand: "Sonos",
+    category: "audio",
+    price: 49999,
+    originalPrice: 54999,
+    rating: 4.8,
+    reviews: 90,
+    countInStock: 15,
+    images: ["https://images.unsplash.com/photo-1608043152269-41e97669d51e?w=800&auto=format&fit=crop"],
+    description: "Featuring six optimally positioned drivers all around the front, sides, and top to support Dolby Atmos Music.",
+    specs: [{ label: "Audio", value: "Dolby Atmos Music" }, { label: "Connectivity", value: "Wi-Fi 6, Bluetooth" }, { label: "Controls", value: "Touch controls" }]
+  },
+  {
+    name: "Marshall Acton III",
+    brand: "Marshall",
+    category: "audio",
+    price: 31999,
+    originalPrice: 34999,
+    rating: 4.7,
+    reviews: 110,
+    countInStock: 20,
+    images: ["https://images.unsplash.com/photo-1543512214-318c7553f230?w=800&auto=format&fit=crop"],
+    description: "Acton III has an even wider soundstage than its predecessor, delivering room-filling Marshall signature sound.",
+    specs: [{ label: "Design", value: "Iconic Classic" }, { label: "Bluetooth", value: "Bluetooth 5.2" }, { label: "Sound", value: "Dynamic Tweeters" }]
+  },
+  {
+    name: "Boat Airdopes 441",
+    brand: "boAt",
+    category: "audio",
+    price: 1999,
+    originalPrice: 2999,
+    rating: 4.4,
+    reviews: 3500,
+    countInStock: 100,
+    images: ["https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&auto=format&fit=crop"],
+    description: "Plug into Nirvana with boAt Airdopes 441 TWS earbuds to enjoy your music in a truly wireless way.",
+    specs: [{ label: "Playback", value: "Up to 30 hours" }, { label: "Waterproof", value: "IPX7" }, { label: "Driver", value: "6mm" }]
+  },
+
+  // ACCESSORIES & CASES (10)
+  {
+    name: "Logitech MX Master 3S",
+    brand: "Logitech",
+    category: "accessories",
+    price: 9999,
+    originalPrice: 10999,
+    rating: 4.9,
+    reviews: 620,
+    countInStock: 45,
+    images: ["https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&auto=format&fit=crop"],
+    description: "Ultrafast magspeed scrolling - remarkable speed, precision & quietness. Up to 8k DPI tracking.",
+    specs: [{ label: "Connectivity", value: "Bluetooth / Logi Bolt" }, { label: "Sensor", value: "8000 DPI" }, { label: "Click", value: "Quiet Clicks" }]
+  },
+  {
+    name: "Keychron K2 V2 Mechanical Keyboard",
+    brand: "Keychron",
+    category: "accessories",
+    price: 8999,
+    originalPrice: 9999,
+    rating: 4.8,
+    reviews: 310,
+    countInStock: 25,
+    images: ["https://images.unsplash.com/photo-1595225476474-87563907a212?w=800&auto=format&fit=crop"],
+    description: "A premium wireless mechanical keyboard crafted for maximum productivity. Hot-swappable switches and customizable RGB backlight.",
+    specs: [{ label: "Layout", value: "75%" }, { label: "Connectivity", value: "Bluetooth / Type-C" }, { label: "Battery", value: "4000mAh" }]
+  },
+  {
+    name: "Anker 737 Power Bank (PowerCore 24K)",
+    brand: "Anker",
+    category: "accessories",
+    price: 14999,
+    originalPrice: 16999,
+    rating: 4.7,
+    reviews: 180,
+    countInStock: 30,
+    images: ["https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&auto=format&fit=crop"],
+    description: "Equipped with the latest Power Delivery 3.1 and bi-directional technology to quickly recharge the portable charger or get a 140W ultra-powerful charge.",
+    specs: [{ label: "Capacity", value: "24,000mAh" }, { label: "Output", value: "140W" }, { label: "Display", value: "Smart Digital Display" }]
+  },
+  {
+    name: "Spigen Liquid Air Armor Case for iPhone 15 Pro",
+    brand: "Spigen",
+    category: "cases",
+    price: 1299,
+    originalPrice: 1599,
+    rating: 4.6,
+    reviews: 450,
+    countInStock: 80,
+    images: ["https://images.unsplash.com/photo-1601593346740-925612772716?w=800&auto=format&fit=crop"],
+    description: "Slim, form-fitted and lightweight. Features an anti-slip matte surface with geometric pattern.",
+    specs: [{ label: "Material", value: "TPU" }, { label: "Compatibility", value: "iPhone 15 Pro" }, { label: "Feature", value: "Air Cushion Technology" }]
+  },
+  {
+    name: "Belkin BoostCharge Pro 3-in-1",
+    brand: "Belkin",
+    category: "accessories",
+    price: 12999,
+    originalPrice: 14999,
+    rating: 4.5,
+    reviews: 95,
+    countInStock: 15,
+    images: ["https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&auto=format&fit=crop"],
+    description: "Charge your Apple devices faster with this beautifully designed charging stand featuring the new magnetic fast charging module for Apple Watch.",
+    specs: [{ label: "Type", value: "MagSafe Stand" }, { label: "Devices", value: "iPhone, Apple Watch, AirPods" }, { label: "Output", value: "15W MagSafe" }]
+  },
+  {
+    name: "Nomad Modern Leather Case",
+    brand: "Nomad",
+    category: "cases",
+    price: 4999,
+    originalPrice: 5499,
+    rating: 4.7,
+    reviews: 120,
+    countInStock: 40,
+    images: ["https://images.unsplash.com/photo-1601593346740-925612772716?w=800&auto=format&fit=crop"],
+    description: "A rugged yet elegant leather case designed to protect your phone from everyday drops and scratches using premium Horween leather.",
+    specs: [{ label: "Material", value: "Horween Leather" }, { label: "Protection", value: "10ft drop" }, { label: "MagSafe", value: "Yes" }]
+  },
+  {
+    name: "Satechi Aluminum Type-C Multi-Port Adapter",
+    brand: "Satechi",
+    category: "accessories",
+    price: 6499,
+    originalPrice: 7499,
+    rating: 4.6,
+    reviews: 210,
+    countInStock: 35,
+    images: ["https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=800&auto=format&fit=crop"],
+    description: "Add a plethora of connections to your laptop or desktop, just by using one Type-C port.",
+    specs: [{ label: "Ports", value: "HDMI, USB-C PD, Ethernet, SD, 3x USB 3.0" }, { label: "Material", value: "Aluminum" }, { label: "Pass-through", value: "60W" }]
+  },
+  {
+    name: "Dbrand Grip Case",
+    brand: "dbrand",
+    category: "cases",
+    price: 3999,
+    originalPrice: null,
+    rating: 4.8,
+    reviews: 340,
+    countInStock: 25,
+    images: ["https://images.unsplash.com/photo-1606220838315-056192d5e927?w=800&auto=format&fit=crop"],
+    description: "The world's grippiest phone case. Period. Military-grade impact protection.",
+    specs: [{ label: "Thickness", value: "2mm" }, { label: "Grip", value: "Microscopic Ridges" }, { label: "Customization", value: "Skin compatible" }]
+  },
+  {
+    name: "Samsung 65W Trio Power Adapter",
+    brand: "Samsung",
+    category: "accessories",
+    price: 4999,
+    originalPrice: 5499,
+    rating: 4.7,
+    reviews: 150,
+    countInStock: 50,
+    images: ["https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&auto=format&fit=crop"],
+    description: "Power 3 devices at once with Super Fast Charging. High-efficiency GaN technology.",
+    specs: [{ label: "Output", value: "65W Max" }, { label: "Ports", value: "2x USB-C, 1x USB-A" }, { label: "Tech", value: "GaN" }]
+  },
+  {
+    name: "Logitech Brio 4K Webcam",
+    brand: "Logitech",
+    category: "accessories",
+    price: 15999,
+    originalPrice: 19999,
+    rating: 4.6,
+    reviews: 280,
+    countInStock: 15,
+    images: ["https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800&auto=format&fit=crop"],
+    description: "Ultra HD webcam for video conferencing, streaming, and recording. Certified for business.",
+    specs: [{ label: "Resolution", value: "4K / 30fps or 1080p / 60fps" }, { label: "HDR", value: "RightLight 3" }, { label: "Microphone", value: "Dual omni-directional" }]
+  }
+];
+
+module.exports = products.map(enrichProductImages);
